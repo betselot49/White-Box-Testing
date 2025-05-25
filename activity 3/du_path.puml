@@ -1,0 +1,28 @@
+@startuml
+title DU Paths for count_vowels_and_consonants.py
+
+start
+:vowels = 'aeiouAEIOU';\n(v_count = 0; c_count = 0);
+
+partition Loop {
+    :for char in text;
+    if (char.isalpha()?) then (yes)
+        if (char in vowels?) then (yes)
+            :v_count += 1;
+        else (no)
+            :c_count += 1;
+        endif
+    else (no)
+    endif
+}
+
+:return v_count, c_count;
+stop
+
+' DU Paths
+
+note right: Path 1:\nL2 → L4 → L5 → L6\n(vowel case)
+note right: Path 2:\nL3 → L4 → L5 → L8\n(consonant case)
+note right: Path 3:\nL2 or L3 → L4 → L5 (fails isalpha)\n→ L10 (non-alpha char)
+note right: Path 4:\nL4 → L5 → L6/8 → L10 (used in return)
+@enduml
